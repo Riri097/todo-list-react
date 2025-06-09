@@ -7,13 +7,23 @@ export default function TodoApp() {
     function AddTask(){
         if(write.trim() === '')
             return;
-        const newTask ={id: Date.now(), name: write };
+        const newTask ={id: Date.now(), name: write, completed: false };
         setTasks([...tasks, newTask]);
         setWrite('');
     }
 
     function deleteTask(id){
         setTasks(tasks.filter(task => task.id !== id));
+    }
+
+    function toggleComplete(id){
+        const updatedTasks = tasks.map(task =>{
+            if(task.id ===id){
+                return{...task, completed: !task.completed};
+            }
+            return task;
+        });
+        setTasks(updatedTasks);
     }
     
     return(
@@ -28,17 +38,27 @@ export default function TodoApp() {
                 value={write}
                 onChange={(e) => setWrite(e.target.value)}
                 />
+
                 <button
                 onClick={AddTask}
                 className='bg-green-500 text-white  rounded-4xl hover:shadow-lg transition-shadow duration-100 w-50'
                 >Add Task </button>
+
                 </div>
                 
                 <ul className='mt-4'>
                     {tasks.map((task) => (
                         <li key={task.id}
                         className='bg-gray-100 px-6 py-1 my-1 rounded-3xl flex justify-between items-center text-sm hover:shadow-lg transition-shadow duration-100'>
-                            <span>{task.name}</span>
+                            <input
+                            type = 'checkbox'
+                            checked = {task.completed}
+                            onChange={() => toggleComplete(task.id) }
+                            className='mr-2'
+                            />
+                            <span className={task.completed ? 'line-through text-gray-500' : ''}>
+                                {task.name} </span>
+
                             <button
                             onClick={() => deleteTask(task.id)}
                             className='text-red-900 hover:text-red-700 '

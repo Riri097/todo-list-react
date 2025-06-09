@@ -6,7 +6,7 @@ tasks holds list of tasks added which is like array of object so ([])
 AddTask is a add function
 write.trim to remove any empty space
 date.now generates unique id based on current time
-newtask is an object which has id and name
+newtask is an object which has id, name, completed
 setTasks adds the newTask to the end of the array
 ...tasks is spread operator that dot holds the space for existing elements
 setWrite clears the input box
@@ -15,6 +15,13 @@ deleteTask is a delete function
 tasks.filter goes through every task and keeps only the ones that doesnt match the id
 this creates a new array without deleted task
 settasks updates the State
+
+toggleComplete function to change the completed value if clicked
+new variable updatedTasks store the toggling feature change
+tasks.map points the array of list of to do's
+the value of task if it matches the id then completed gets true
+if it is unclicked which means completed is false which returns task
+the setTasks value is now changed to updatedTasks
 
 input field
 value of the input is taken by write
@@ -26,7 +33,17 @@ onclick it calls the add task function
 
 to display the list of tasks
 .map shows a way or path through tasks array to display
-key={task.id} helps to keep track of items
+key={task.id} helps to keep track of items 
+
+an input box for checkbox
+type is checkbox
+checked stores value of task.completed which is maped but tasks.map
+onchange the toggleComplete function is called where id represents task.id
+
+span tag to display 
+task.completed? is checking condition
+if true means checked the css is linethrough
+if false means unchecked the css is as it is
 task.name shows the task text
 
 delete button
